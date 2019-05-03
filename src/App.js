@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import AppHooks from "./AppHooks"
+class App extends React.Component {
+  state = {
+    count: this.props.count,
+    title: this.props.title
+  }
+  formHandler = (e) => {
+    e.preventDefault()
+  }
+  titleHander = (e) => {
+    this.setState({
+      title: e.target.value
+    })
+  }
+  submitHander = () => {
+    // this.setState({
+    //   title: 
+    // })
+  }
+  render() {
+    return (
+      <div className="App" style={{ display: 'flex', justifyContent: "center", alignItems: "center", flexFlow: "column" }}>
+        <h1>{this.state.title}</h1>
+        <h2>count: {this.state.count}</h2>
+        <form onSubmit={this.formHandler}>
+          <input value={this.state.title} onChange={this.titleHander} />
+          <button type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
+    )
+  }
 }
-
-export default App;
+App.defaultProps = {
+  count: 10,
+  title: "Hello hooks!"
+}
+// export default App;
+export default AppHooks;
